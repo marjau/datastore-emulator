@@ -19,6 +19,6 @@ jobs:
                 ./google-cloud-sdk/install.sh --quiet --usage-reporting false --path-update true --command-completion true
                 ./google-cloud-sdk/bin/gcloud components install beta cloud-datastore-emulator --quiet
             - name: Run Emulator
-              run: gcloud beta emulators datastore start
+              run: ./google-cloud-sdk/bin/gcloud beta emulators datastore start --project=hds-dev --store-on-disk --use-firestore-in-datastore-mode --host-port=0.0.0.0:8081
             - name: Test
               run: echo "running tests"
