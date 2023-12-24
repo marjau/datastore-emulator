@@ -8,7 +8,9 @@ jobs:
     emulator:
         runs-on: ubuntu-latest
         steps:
-            - name: Install Emulator
+            - name: Install emulator
+              run: apt-get install google-cloud-sdk-datastore-emulator
+            - name: Run Emulator
               run: gcloud beta emulators datastore start
             - name: Test
               run: echo "running tests"
