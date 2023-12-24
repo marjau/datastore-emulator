@@ -28,7 +28,7 @@ jobs:
             - name: Run Emulator
               run: ./google-cloud-sdk/bin/gcloud beta emulators datastore start --project=hds-dev --no-store-on-disk --use-firestore-in-datastore-mode --host-port=0.0.0.0:8081 &
             - name: Test
-              run: curl localhost:8081
+              run: curl -l localhost:8081
 
             #   - name: Install dependencies
             #   run: |
