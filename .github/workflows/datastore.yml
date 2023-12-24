@@ -15,7 +15,8 @@ jobs:
                 sudo echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
                 sudo curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg 
                 sudo apt-get update -y 
-                sudo apt-get install google-cloud-sdk-datastore-emulator -y
+                sudo apt-get install default-jre
+                sudo apt-get install google-cloud-sdk-datastore-emulator -y --no-install-recommends
             - name: Run Emulator
               run: gcloud beta emulators datastore start
             - name: Test
