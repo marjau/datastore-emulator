@@ -1,0 +1,12 @@
+name: Datastore Emulator
+on: 
+    push:
+        branches:
+            - master
+
+jobs:
+    emulator:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Test
+              run: echo "running tests"
