@@ -12,6 +12,8 @@ jobs:
             CLOUDSDK_VERSION: 458.0.1
             CLOUDSDK_ARCH: x86_64
         steps:
+            - name: Information
+              run: dpkg -l | grep -i cloud
             - name: Cache dependencies
               id: cache
               uses: actions/cache@v3
