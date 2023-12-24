@@ -17,7 +17,7 @@ jobs:
               uses: actions/cache@v3
               with:
                 path: google-cloud-sdk
-                key: deps-gcloud
+                key: gcloud-installation
             - name: Install Google Cloud SDK
               if: steps.cache.outputs.cache-hit != 'true'
               run: |
