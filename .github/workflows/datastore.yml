@@ -9,6 +9,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Install Emulator
-              run: gcloud components install cloud-datastore-emulator
+              run: gcloud beta emulators datastore start
             - name: Test
               run: echo "running tests"
