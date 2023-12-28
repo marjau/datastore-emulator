@@ -17,8 +17,10 @@ jobs:
         services:
             datastore-emulator:
                 image: marcosj/datastore-emulator:ubuntu
+                ports:
+                    - 8081:8081
                 env:
                     CLOUDSDK_CORE_PROJECT: hds-dev
         steps:
             - name: Test
-              run: curl -l datastore-emulator:8081
+              run: curl -l 127.0.0.1:8081
