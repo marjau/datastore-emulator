@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  datastore-emulator:
+    container_name: datastore-emulator
+    image: marcosj/datastore-emulator:ubuntu
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - CLOUDSDK_CORE_PROJECT=hds-dev
+      - GCLOUD_STORE_ON_DISK=true
+    volumes:
+       - datastore-cfg:/home/dsuser/.config/gcloud
+    ports:
+      - 8081:8081
+    restart: unless-stopped
+  
+volumes:
+  datastore-cfg:
