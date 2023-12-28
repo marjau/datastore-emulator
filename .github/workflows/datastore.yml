@@ -8,12 +8,17 @@ on:
 jobs:
     emulator:
         runs-on: ubuntu-latest
-        container:
-          image: marcosj/datastore-emulator:ubuntu
-          env:
-            CLOUDSDK_CORE_PROJECT: hds-dev  
+        # container:
+        #   image: marcosj/datastore-emulator:ubuntu
+        #   env:
+        #     CLOUDSDK_CORE_PROJECT: hds-dev  
         env:
             CLOUDSDK_CORE_PROJECT: hds-dev
+        services:
+            datastore-emulator:
+                image: marcosj/datastore-emulator:ubuntu
+                env:
+                    CLOUDSDK_CORE_PROJECT: hds-dev
         steps:
             - name: Test
-              run: curl -l localhost:8081
+              run: curl -l datastore-emulator:8081
