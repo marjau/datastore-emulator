@@ -10,6 +10,8 @@ jobs:
         runs-on: ubuntu-latest
         container:
           image: marcosj/datastore-emulator:ubuntu
+          env:
+            CLOUDSDK_CORE_PROJECT: hds-dev  
         env:
             CLOUDSDK_CORE_PROJECT: hds-dev
         steps:
