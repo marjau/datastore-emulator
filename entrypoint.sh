@@ -7,7 +7,7 @@ export PATH=$PATH:${GCLOUD_DIR}/bin
 PERSIST_DATA_FLAG="--no-store-on-disk"
 if [ "$GCLOUD_STORE_ON_DISK" == true ]
 then
-    PERSIST_DATA_FLAG+="--store-on-disk"    
+    PERSIST_DATA_FLAG="--store-on-disk"    
 fi
 
 gcloud beta emulators datastore start \
