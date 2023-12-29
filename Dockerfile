@@ -1,8 +1,8 @@
-FROM ubuntu
+FROM debian:stable-slim
 
 LABEL maintainer="Marcos Jauregui <it.marcosj@gmail.com>"
 LABEL title="Datastore emulator"
-LABEL description="GCP Datastore emulator based on Ubuntu"
+LABEL description="GCP Datastore emulator based on Debian stable slim"
 
 # SETUP ----------------------------------------------------------
 
@@ -36,26 +36,25 @@ ARG GCLOUD_VERSION="458.0.1"
 ARG GCLOUD_ARCH="x86_64"
 ARG GCLOUD_FILE="google-cloud-cli-${GCLOUD_VERSION}-linux-${GCLOUD_ARCH}.tar.gz"
 
+ENV CLOUDSDK_CORE_PROJECT="test-project"
+ENV DS_HOST="0.0.0.0"
 ENV GCLOUD_DIR="${DS_HOME}/google-cloud-sdk"
 ENV GCLOUD_STORE_ON_DISK=false
-ENV CLOUDSDK_CORE_PROJECT="test-project"
 
-RUN <<EOT bash 
-    set -eux
-    curl -o ${DS_HOME}/${GCLOUD_FILE} https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${GCLOUD_FILE} 
-    tar -xvf ${DS_HOME}/${GCLOUD_FILE} -C ${DS_HOME}/ 
-    rm -v ${DS_HOME}/${GCLOUD_FILE}
-    ${GCLOUD_DIR}/install.sh \
+RUN set -eux \
+    && curl -o ${DS_HOME}/${GCLOUD_FILE} https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${GCLOUD_FILE} \
+    && tar -xvf ${DS_HOME}/${GCLOUD_FILE} -C ${DS_HOME}/ \
+    && rm -v ${DS_HOME}/${GCLOUD_FILE} \
+    && ${GCLOUD_DIR}/install.sh \
         --quiet \
         --usage-reporting false \
         --path-update true \
-        --command-completion true 
-    source ${GCLOUD_DIR}/path.bash.inc
-    gcloud components install \
+        --command-completion true \ 
+    && export PATH=$PATH:${GCLOUD_DIR}/bin \
+    && gcloud components install \
         beta \
         cloud-datastore-emulator \
         --quiet
-EOT
 
 # ----------------------------------------------------------
 

@@ -1,15 +1,17 @@
 #!/bin/bash
 
-source ${GCLOUD_DIR}/path.bash.inc
+set -eux
 
-DS_FLAGS="--use-firestore-in-datastore-mode "
-DS_FLAGS+="--host-port=0.0.0.0:8081 "
+export PATH=$PATH:${GCLOUD_DIR}/bin
 
+PERSIST_DATA_FLAG="--no-store-on-disk"
 if [ "$GCLOUD_STORE_ON_DISK" == true ]
 then
-    DS_FLAGS+="--store-on-disk"
-else
-    DS_FLAGS+="--no-store-on-disk"
+    PERSIST_DATA_FLAG+="--store-on-disk"    
 fi
 
-gcloud beta emulators datastore start $DS_FLAGS
+gcloud beta emulators datastore start \
+    --project=$CLOUDSDK_CORE_PROJECT \
+    --use-firestore-in-datastore-mode \
+    --host-port=$DS_HOST:8081 \
+    $PERSIST_DATA_FLAG

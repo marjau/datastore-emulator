@@ -3,13 +3,12 @@ version: '3.9'
 services:
   datastore-emulator:
     container_name: datastore-emulator
-    image: marcosj/datastore-emulator:ubuntu
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: marcosj/datastore-emulator
+    build: .
     environment:
-      - CLOUDSDK_CORE_PROJECT=hds-dev
-      - GCLOUD_STORE_ON_DISK=true
+      - CLOUDSDK_CORE_PROJECT=my-project
+      # - DS_HOST=localhost
+      # - GCLOUD_STORE_ON_DISK=true
     volumes:
        - datastore-cfg:/home/dsuser/.config/gcloud
     ports:
